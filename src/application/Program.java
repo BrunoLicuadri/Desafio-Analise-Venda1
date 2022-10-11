@@ -38,11 +38,10 @@ public class Program {
 			System.out.println();
 			System.out.println("Cinco primeiras vendas de 2016 de maior preço médio: ");
 
-			Comparator<Double> comp = (S1, S2) -> S1.compareTo(S2);
+			Comparator<Sale> comp = (S1, S2) -> S1.averagePrice().compareTo(S2.averagePrice());
 			
-			List <Double> avg = sale.stream()
+			List <Sale> avg = sale.stream()
                     .filter(s -> s.getYear() == 2016)
-                    .map(s -> s.averagePrice())
                     .sorted(comp.reversed())
                     .limit(5)
                     .collect(Collectors.toList());

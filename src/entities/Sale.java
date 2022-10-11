@@ -66,4 +66,9 @@ public class Sale{
 		
 	}
 
+	public Object compareTo(Sale s2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
