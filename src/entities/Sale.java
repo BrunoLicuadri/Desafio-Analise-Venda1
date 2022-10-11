@@ -60,8 +60,9 @@ public class Sale{
 		return total / items;
 	}
 	
+	@Override
 	public String toString(){
-		return month + "/" + year + ", " + seller + ", " + items + ", " + total + ", pm = R$" + String.format("%.2f", averagePrice());
+		return month + "/" + year + ", " + seller + ", " + items + ", " + String.format("%.2f", total) + ", pm = R$" + String.format("%.2f", averagePrice());
 		
 	}
 
