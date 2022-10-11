@@ -1,6 +1,6 @@
 package entities;
 
-public class Sale {
+public class Sale{
 
 	private Integer month;
 	private Integer year;
@@ -13,6 +13,7 @@ public class Sale {
 		this.year = year;
 		this.seller = seller;
 		this.items = items;
+		this.total = total;
 	}
 
 	public Integer getMonth() {
@@ -57,6 +58,11 @@ public class Sale {
 
 	public Double averagePrice() {
 		return total / items;
+	}
+	
+	public String toString(){
+		return month + "/" + year + ", " + seller + ", " + items + ", " + total + ", pm = R$" + String.format("%.2f", averagePrice());
+		
 	}
 
 }

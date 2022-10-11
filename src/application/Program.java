@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
-import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import entities.Sale;
 
@@ -25,7 +25,6 @@ public class Program {
 		String path = sc.nextLine();
 
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-			;
 
 			String line = br.readLine();
 
@@ -35,22 +34,29 @@ public class Program {
 						Integer.parseInt(fields[3]), Double.parseDouble(fields[4])));
 				line = br.readLine();
 			}
-
+			
+			System.out.println();
 			System.out.println("Cinco primeiras vendas de 2016 de maior preço médio: ");
 
-			Comparator<String> comp = (S1, S2) -> S1.toUpperCase().compareTo(S2.toUpperCase());
-
-			List<String> pm = sale.stream().filter(x -> x.getAveragePrice()).sorted(comp.reversed()).limit(5)
-					.collect(Collector.toSale());
-
-			pm.forEach(System.out::println);
-
+			Comparator<Double> comp = (S1, S2) -> S1.compareTo(S2);
+			
+			List <Double> avg = sale.stream()
+                    .filter(s -> s.getYear() == 2016)
+                    .map(s -> s.averagePrice())
+                    .sorted(comp.reversed())
+                    .limit(5)
+                    .collect(Collectors.toList());
+			
+			avg.forEach(System.out::println);
+			
+			
 			double sum = sale.stream()
-					.filter(x -> x.getSeller("Logan"))
-					.filter(x -> x.getMonth(1,7))
-					.map(x -> x.getPrice())
+					.filter(x -> x.getSeller() == "Logan")
+					.filter(x -> x.getMonth() == 1 || x.getMonth() == 7)
+					.map(x -> x.getTotal())
 					.reduce(0.0, (x, y) -> x + y);
 
+			System.out.println();
 			System.out.println("Valor total vendido pelo vendedor Logan nos meses 1 e 7 = " + sum);
 
 		} catch (
